@@ -31,7 +31,7 @@ public class CardTransferTest {
         var secondCardBalance = dashboardPage.getCardBalance(secondCardInfo);
         var amount = generateValidAmount(firstCardBalance);
         var expectedBalanceFirstCard = firstCardBalance - amount;
-        var expectedBalanceSecondCard = secondCardBalance - amount;
+        var expectedBalanceSecondCard = secondCardBalance + amount;
         var transferPage = dashboardPage.selectCardToTransfer(secondCardInfo);
         dashboardPage = transferPage.makeValidTransfer((String.valueOf(amount)), firstCardInfo);
         var currentBalanceFirstCard = dashboardPage.getCardBalance(firstCardInfo);
