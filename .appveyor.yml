@@ -10,7 +10,7 @@ build: off
 
 install:
 
-  - java -jar ./artifacts/app-ibank-build-for-testrs &
+  - java -jar ./artifacts/app-ibank-build-for-testers.jar &
 
 build_script:
   - chmod +x gradlew
