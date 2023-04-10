@@ -26,7 +26,7 @@ public class CardTransferPage {
         return new DashboardPage();
     }
 
-    private void makeTransfer(String amountToTransfer, DataHelper.CardInfo cardInfo) {
+    public void makeTransfer(String amountToTransfer, DataHelper.CardInfo cardInfo) {
         inputAmount.setValue(amountToTransfer);
         inputFrom.setValue(cardInfo.getCardNumber());
         transferButton.click();

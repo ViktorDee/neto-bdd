@@ -2,6 +2,7 @@ package ru.netology.tests;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.platform.commons.annotation.Testable;
 import ru.netology.data.DataHelper;
 import ru.netology.page.DashboardPage;
 import ru.netology.page.LoginPage;
@@ -39,5 +40,21 @@ public class CardTransferTest {
         assertEquals(expectedBalanceFirstCard, currentBalanceFirstCard);
         assertEquals(expectedBalanceSecondCard, currentBalanceSecondCard);
 
+    }
+
+    @Test
+    public void shouldGetAnErrorMessageIfBalanceLessThanAmount() {
+        var firstCardInfo = getFirstCardInfo();
+        var secondCardInfo = getSecondCardInfo();
+        var firstCardBalance = dashboardPage.getCardBalance(firstCardInfo);
+        var secondCardBalance = dashboardPage.getCardBalance(secondCardInfo);
+        var amount = generateInvalidAmount(secondCardBalance);
+        var transferPage = dashboardPage.selectCardToTransfer(firstCardInfo);
+        transferPage.makeTransfer(String.valueOf(amount), secondCardInfo);
+        transferPage.findErrorMessage("На балансе карты недостаточно средств");
+        var currentBalanceFirstCard = dashboardPage.getCardBalance(firstCardInfo);
+        var currentBalanceSecondCard = dashboardPage.getCardBalance(secondCardInfo);
+        assertEquals(firstCardBalance, currentBalanceSecondCard);
+        assertEquals(secondCardBalance, currentBalanceSecondCard);
     }
 }
